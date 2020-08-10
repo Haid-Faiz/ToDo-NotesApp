@@ -25,6 +25,8 @@ public class NotesInDetail extends AppCompatActivity {
         setUpIntent();
     }
 
+
+    // menu inflate
     private void setUpIntent() {
 
         Intent intent = getIntent();
