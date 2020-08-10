@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">To Do Notes</string>
+    <string name="SharedPref">saveToLocal</string>
+</resources>
