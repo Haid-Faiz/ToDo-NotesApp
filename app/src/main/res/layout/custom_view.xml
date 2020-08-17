@@ -4,6 +4,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="16dp"
     style="@style/CardView.Light"
     app:cardCornerRadius="10dp"
@@ -26,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_height="wrap_content"
             android:text="Custom Title"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/checkboxID" />
 
         <TextView
             android:id="@+id/customDescID"
@@ -39,6 +40,13 @@
             app:layout_constraintStart_toStartOf="@id/customTitleID"
             app:layout_constraintTop_toBottomOf="@id/customTitleID" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkboxID"
+            app:layout_constraintTop_toTopOf="@id/customTitleID"
+            app:layout_constraintBottom_toBottomOf="@id/customDescID"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
