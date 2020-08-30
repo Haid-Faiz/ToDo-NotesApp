@@ -8,40 +8,42 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="307dp"
-        android:layout_height="56dp"
+        android:layout_width="317dp"
+        android:layout_height="107dp"
         android:layout_marginTop="56dp"
-        android:gravity="center"
+        android:gravity="center|top"
         android:text="Title"
         android:textColor="#061CA8"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/myImageID" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
+        android:layout_height="210dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center|top"
         android:text="Description"
         android:textColor="#EA9400"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="273dp"
-        android:layout_height="261dp"
+        android:id="@+id/myImageID"
+        android:layout_width="254dp"
+        android:layout_height="218dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.853"
-        app:srcCompat="@drawable/mindorks" />
+        app:layout_constraintVertical_bias="0.056"
+        app:srcCompat="@drawable/todonotes" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,9 +14,11 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import java.io.File
@@ -41,6 +43,23 @@ class AddNotesActivity : AppCompatActivity() {
 
         bindView()
         clickListener()
+
+        saveButton.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                var title = inputLayoutTitle.editText?.text.toString().trim()
+                var desc = inputLayoutDesc.editText?.text.toString().trim()
+
+                if(title.isNotEmpty()) {
+                    var intent = Intent()
+                    intent.putExtra("title", title)
+                    intent.putExtra("desc", desc)
+                    intent.putExtra("imagePath", picturePath)
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                } else  Toast.makeText(this@AddNotesActivity, "Title can't be empty", Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 
     private fun clickListener() {
@@ -54,7 +73,7 @@ class AddNotesActivity : AppCompatActivity() {
         })
     }
 
-    private fun isPermissionChecked(): Boolean {
+    private fun isPermissionChekkkkcked(): Boolean {
 
         var cameraPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
         var storagePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -81,6 +100,8 @@ class AddNotesActivity : AppCompatActivity() {
             MY_PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)   // Granted permission grantResults array me aa jaati hai
                     setUpDialog()
+                else
+                    Toast.makeText(this@AddNotesActivity, "Permission required", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -96,9 +117,9 @@ class AddNotesActivity : AppCompatActivity() {
         galleyText.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
 
-                var intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                var  galleryIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 // var intent = Intent(Intent.ACTION_GET_CONTENT).setType("image/*")
-                startActivityForResult(intent, REQUEST_CODE_GALLERY)
+                startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY)
                 alertDialog.hide()
             }
         })
@@ -106,21 +127,30 @@ class AddNotesActivity : AppCompatActivity() {
         cameraText.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
 
-//                var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                var photoFile: File? = null
-//                photoFile = createImage()
+                var cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+                var photoFile : File = createImage()
+
+                if (photoFile != null) {
+
+                    val photoUri = FileProvider.getUriForFile(this@AddNotesActivity, BuildConfig.APPLICATION_ID +".provider", photoFile)
+                    picturePath = photoFile.absolutePath
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)  // we want to generate output of this photoUri
+                    startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA)
+
+                    alertDialog.hide()
+                }
             }
         })
-
     }
 
     private fun createImage(): File {
 
-        var timeStamp = SimpleDateFormat("yyyymmddhhmmss").format(Date())    // also write in formate yyyy-mm-dd-hh-mm-ss
-        var fileName = "JPEG_" + timeStamp + "_"
-        var storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        var timeStamp = SimpleDateFormat("yyyymmddhhmmss").format(Date())      // also write in formate yyyy-mm-dd-hh-mm-ss
+        var fileName = "JPEG _" + timeStamp + "_"
+        var storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)      // image will be stored in this directory
 
-        return createTempFile(fileName, ".jpg", storageDirectory)
+        return File.createTempFile(fileName, ".jpg", storageDirectory)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -138,10 +168,10 @@ class AddNotesActivity : AppCompatActivity() {
                     val columnIndex = cursor?.getColumnIndex(filePath[0])
                     picturePath = cursor?.getString(columnIndex!!) !!
                     cursor?.close()
-                    Glide.with(this).load(picturePath).into(imageView)
+                    Glide.with(this).load(picturePath).circleCrop().into(imageView)
                 }
                 REQUEST_CODE_CAMERA -> {
-
+                    Glide.with(this).load(picturePath).circleCrop().into(imageView)
                 }
             }
         }

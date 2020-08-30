@@ -3,4 +3,5 @@
     <color name="colorPrimary">#03DAC6</color>
     <color name="colorPrimaryDark">#03DAC6</color>
     <color name="colorAccent">#03DAC6</color>
+    <color name="deleteAlert">#F45F5F</color>
 </resources>

@@ -1,33 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="16dp"
+    android:id="@+id/cardView"
     style="@style/CardView.Light"
-    app:cardCornerRadius="10dp"
-    app:cardBackgroundColor="#BAFBFBF1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="7dp"
+    app:cardBackgroundColor="#1903DAC6"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/imageID"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/customDescID"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/customTitleID"
+            tools:srcCompat="@tools:sample/avatars" />
+
 
         <TextView
             android:id="@+id/customTitleID"
             android:layout_width="0dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="Custom Title"
-            app:layout_constraintEnd_toStartOf="@id/checkboxID" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintEnd_toStartOf="@id/checkboxID"
+            app:layout_constraintStart_toEndOf="@id/imageID"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/customDescID"
@@ -41,12 +56,12 @@
             app:layout_constraintTop_toBottomOf="@id/customTitleID" />
 
         <CheckBox
+            android:id="@+id/checkboxID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/checkboxID"
-            app:layout_constraintTop_toTopOf="@id/customTitleID"
             app:layout_constraintBottom_toBottomOf="@id/customDescID"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/customTitleID" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

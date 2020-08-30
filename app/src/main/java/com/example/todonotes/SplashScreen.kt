@@ -1,5 +1,7 @@
 package com.example.todonotes
 
+import OnBoard.OnBoardActivity
+import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,28 +11,40 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SplashScreen : AppCompatActivity() {
 
-    lateinit var sharedPreferences: SharedPreferences
-    private val delayTime = 2300
+    lateinit var sharedPreferences1: SharedPreferences
+    lateinit var sharedPreferences2: SharedPreferences
+    private val delayTime = 1500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
         supportActionBar?.hide()
-        sharedPreferences = getSharedPreferences("saveToLocal", Context.MODE_PRIVATE)
-
+        setUpSharedPref()
         timeHandler()
+    }
+
+    private fun setUpSharedPref() {
+        sharedPreferences1 = getSharedPreferences("saveToLocal", Context.MODE_PRIVATE)
+        sharedPreferences2 = getSharedPreferences("OnBoardedValue", Context.MODE_PRIVATE)
     }
 
     private fun timeHandler() {
 
         Handler().postDelayed({
-            if (sharedPreferences.getBoolean("isLogin", false))
+            if (sharedPreferences1.getBoolean("isLogin", false)) {
                 startActivity(Intent(this@SplashScreen, MyToDoActivity::class.java))
-            else
-                startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
-            finish()
+                finish()
+            }
+            else {
 
-        }, delayTime.toLong())
+                if(sharedPreferences2.getBoolean("isOnBoarded",false))
+                    startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
+                else
+                    startActivity(Intent(this@SplashScreen, OnBoardActivity::class.java))
+
+                finish()
+
+            }}, delayTime.toLong())
     }
 }
