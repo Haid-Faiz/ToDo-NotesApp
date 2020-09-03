@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="@+id/CreateUserID"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/CreateUserID"
-        app:layout_constraintTop_toBottomOf="@+id/CreateUserID">
+        app:layout_constraintTop_toBottomOf="@+id/CreateUserID"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

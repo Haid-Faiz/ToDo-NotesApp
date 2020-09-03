@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="MainScreenFragment.MainScreenViewPager"></activity>
         <activity
             android:name=".CreateAcActivity"
             android:theme="@style/RemoveActionBar"></activity>
@@ -33,16 +32,19 @@
         </provider>
 
         <activity android:name=".AddNotesActivity" />
-        <activity android:name=".SplashScreen">
+
+        <activity android:name=".SplashScreen"
+            android:theme="@style/AnimateSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/RemoveActionBar"></activity>
+            android:theme="@style/RemoveActionBar"/>
         <activity android:name=".MyToDoActivity" />
         <activity android:name=".DetailNotes" />
 

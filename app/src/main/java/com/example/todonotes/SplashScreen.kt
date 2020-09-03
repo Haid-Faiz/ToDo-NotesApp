@@ -13,12 +13,14 @@ class SplashScreen : AppCompatActivity() {
 
     lateinit var sharedPreferences1: SharedPreferences
     lateinit var sharedPreferences2: SharedPreferences
-    private val delayTime = 1500
+    private val delayTime = 500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
 
+        // i have disconnected it's layout to make real Splash screen
+        //setContentView(R.layout.activity_splash_screen)
+      //  Thread.sleep(1000)      it also holds the screen i mean that thread
         supportActionBar?.hide()
         setUpSharedPref()
         timeHandler()
@@ -31,20 +33,18 @@ class SplashScreen : AppCompatActivity() {
 
     private fun timeHandler() {
 
-        Handler().postDelayed({
-            if (sharedPreferences1.getBoolean("isLogin", false)) {
-                startActivity(Intent(this@SplashScreen, MyToDoActivity::class.java))
-                finish()
-            }
-            else {
+        Handler().postDelayed({  if (sharedPreferences1.getBoolean("isLogin", false)) {
+                        startActivity(Intent(this@SplashScreen, MyToDoActivity::class.java))
+                        finish()
+                    }
+                    else {
 
-                if(sharedPreferences2.getBoolean("isOnBoarded",false))
-                    startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
-                else
-                    startActivity(Intent(this@SplashScreen, OnBoardActivity::class.java))
+                        if(sharedPreferences2.getBoolean("isOnBoarded",false))
+                            startActivity(Intent(this@SplashScreen, LoginActivity::class.java))
+                        else
+                            startActivity(Intent(this@SplashScreen, OnBoardActivity::class.java))
 
-                finish()
-
-            }}, delayTime.toLong())
+                        finish()
+                    }}, delayTime.toLong())
     }
 }

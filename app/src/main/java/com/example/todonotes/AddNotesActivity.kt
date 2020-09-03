@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -40,6 +41,9 @@ class AddNotesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_notes)
+
+        supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+        supportActionBar?.setCustomView(R.layout.custom_action_bar)
 
         bindView()
         clickListener()
@@ -73,7 +77,7 @@ class AddNotesActivity : AppCompatActivity() {
         })
     }
 
-    private fun isPermissionChekkkkcked(): Boolean {
+    private fun isPermissionChecked(): Boolean {
 
         var cameraPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
         var storagePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)

@@ -3,5 +3,6 @@
     <color name="colorPrimary">#03DAC6</color>
     <color name="colorPrimaryDark">#03DAC6</color>
     <color name="colorAccent">#03DAC6</color>
-    <color name="deleteAlert">#F45F5F</color>
+    <color name="deleteAlert">#E64343</color>
+    <color name="splashBackColor">#FFFFFF</color>
 </resources>
