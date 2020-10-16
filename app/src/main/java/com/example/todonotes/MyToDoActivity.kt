@@ -176,6 +176,11 @@ class MyToDoActivity : AppCompatActivity() {
         val linearLayoutManager: LinearLayoutManager = LinearLayoutManager(this@MyToDoActivity)
         linearLayoutManager.orientation = RecyclerView.VERTICAL           // In Java..
         // linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+//         reversing layout
+//         linearLayoutManager.setReverseLayout(true);    In Java        
+//         linearLayoutManager.setStackFromEnd(true);  
+        linearLayoutManager.reverseLayout = true
+        linearLayoutManager.stackFromEnd = true  
         recyclerView.layoutManager = linearLayoutManager         // In Java
         //  recycler.setLayOutManager(linearLayout);
 
