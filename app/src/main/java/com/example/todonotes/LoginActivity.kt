@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var Email : TextInputLayout
-    lateinit var Pass : TextInputLayout
-    lateinit var loginButton : Button
+    lateinit var Email: TextInputLayout
+    lateinit var Pass: TextInputLayout
+    lateinit var loginButton: Button
     lateinit var createGoButton: Button
     lateinit var sharedPreferences1: SharedPreferences
     lateinit var sharedPreferences2: SharedPreferences
@@ -30,32 +30,42 @@ class LoginActivity : AppCompatActivity() {
 
     private fun clickListeners() {
 
-        loginButton.setOnClickListener(object : View.OnClickListener{
+        loginButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
 
                 var email = Email.editText?.text.toString().trim()
                 var pass = Pass.editText?.text.toString().trim()
 
-                if (email.isNotEmpty() and pass.isNotEmpty()){
+                if (email.isNotEmpty() and pass.isNotEmpty()) {
 
-                    if (email == sharedPreferences2.getString("userName",null)  &&
-                            pass == sharedPreferences2.getString("password", null)){
+                    Email.error = null
+                    Pass.error = null
+
+                    if (email == sharedPreferences2.getString("userName", null) &&
+                            pass == sharedPreferences2.getString("password", null)) {
 
                         var intent = Intent(this@LoginActivity, MyToDoActivity::class.java)
                         startActivity(intent)
                         // saving session or login state
                         saveLoginStatus()
                         finish()
-                    }
-                    else
+                    } else
                         Toast.makeText(this@LoginActivity, "User doesn't exist", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (email.isNotEmpty())
+                        Email.error = null
+                    else
+                        Email.error = "Required"
+
+                    if (pass.isNotEmpty())
+                        Pass.error = null
+                    else
+                        Pass.error = "Required"
                 }
-                else
-                    Toast.makeText(this@LoginActivity, "Fields can't be empty", Toast.LENGTH_SHORT).show()
             }
         })
 
-        createGoButton.setOnClickListener(object : View.OnClickListener{
+        createGoButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 startActivity(Intent(this@LoginActivity, CreateAcActivity::class.java))
                 finish()

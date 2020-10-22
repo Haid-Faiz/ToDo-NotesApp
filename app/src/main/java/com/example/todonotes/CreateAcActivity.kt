@@ -44,6 +44,8 @@ class CreateAcActivity : AppCompatActivity() {
                  pass = password.editText?.text.toString().trim()
 
                 if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(pass)){
+                    userName.error = null
+                    password.error = null
 
                     if (!isEmpty) {
 
@@ -61,7 +63,15 @@ class CreateAcActivity : AppCompatActivity() {
                     }
                 }
                 else{
-                    Toast.makeText(this@CreateAcActivity, "Fields can't be empty", Toast.LENGTH_SHORT).show()
+                    if (username.isNotEmpty())
+                        userName.error = null
+                    else
+                        userName.error = "Required"
+
+                    if (pass.isNotEmpty())
+                        password.error = null
+                    else
+                        password.error = "Required"
                 }
             }
         })

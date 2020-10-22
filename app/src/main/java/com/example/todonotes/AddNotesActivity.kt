@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.airbnb.lottie.BuildConfig
 import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputLayout
 import java.io.File
@@ -53,14 +54,24 @@ class AddNotesActivity : AppCompatActivity() {
                 var title = inputLayoutTitle.editText?.text.toString().trim()
                 var desc = inputLayoutDesc.editText?.text.toString().trim()
 
-                if(title.isNotEmpty()) {
+                if(title.isNotEmpty() and desc.isNotEmpty()) {
                     var intent = Intent()
                     intent.putExtra("title", title)
                     intent.putExtra("desc", desc)
                     intent.putExtra("imagePath", picturePath)
                     setResult(Activity.RESULT_OK, intent)
                     finish()
-                } else  Toast.makeText(this@AddNotesActivity, "Title can't be empty", Toast.LENGTH_SHORT).show()
+                } else{
+                    if (title.isNotEmpty())
+                        inputLayoutTitle.error = null
+                    else
+                        inputLayoutTitle.error = "Required"
+
+                    if (desc.isNotEmpty())
+                        inputLayoutDesc.error = null
+                    else
+                        inputLayoutDesc.error = "Required"
+                }
             }
 
         })
